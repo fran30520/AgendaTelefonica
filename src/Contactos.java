@@ -10,6 +10,10 @@ public class Contactos {
         this.numero = numero;
     }
 
+    public Contactos(String nombre) {
+        this.nombre = nombre;
+        this.numero = 0;
+    }
     //metodos Getter y Setter
 
     public String getNombre() {
@@ -29,7 +33,7 @@ public class Contactos {
     }
 
     //metodo toString
-    public String toString(){
+    public String toString() {
         return "El " + nombre + "tiene el número de telefono: " + numero;
     }
 }
