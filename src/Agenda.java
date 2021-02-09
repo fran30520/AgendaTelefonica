@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Agenda {
 
-    Scanner sc=new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
     //variables y constantes
     private Contactos contactos[];
@@ -69,45 +69,55 @@ public class Agenda {
     //buscaContacto(String nombre): busca un contacto por su nombre y muestra su teléfono.
     public void buscaContacto(String nombre) {
         for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i]==null && contactos[i])
-        }
-
-    }
-
-    //eliminarContacto(Contacto c): elimina el contacto de la agenda,
-    // indica si se ha eliminado o no por pantalla
-    public void eliminarContacto() {
-        String nombre="";
-        System.out.println("Introduce el nombre del contacto que quieres eliminar");
-        nombre=sc.nextLine();
-        for (int i=0;i<contactos.length;i++){
-            if (contactos[i].get)
-        }
-
-    }
-
-    //agendaLlena(): indica si la agenda está llena.
-    public boolean agendaLlena() {
-        for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i] == null) {
-                return false;//Aun quedan huecos en la agenda
+            if (contactos[i].getNombre().equalsIgnoreCase(nombre)) {
+                System.out.println("El contacto de nombre: " + contactos[i].getNombre() + " tiene el telefono: "
+                        + contactos[i].getNumero());
             }
+
         }
-        return true;//La agenda estaria llena
-
     }
+        //eliminarContacto(Contacto c): elimina el contacto de la agenda,
+        // indica si se ha eliminado o no por pantalla
+        public void eliminarContacto () {
 
-    //huecosLibres(): indica cuantos contactos más podemos meter.
-    public int huecosLibres() {
-        int cuentahuecos = 0;
-        for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i] == null) {
-                System.out.println("El lugar en la agenda nº: " + i + " esta vacio");
-                cuentahuecos++;
+            String nombre2 = "";
+            System.out.println("Introduce el nombre del contacto que quieres eliminar");
+            nombre2 = sc.nextLine();
+            for (int i = 0; i < contactos.length; i++) {
+                if (contactos[i].getNombre().equalsIgnoreCase(nombre2)) {
+                    contactos[i] = null;
+                    System.out.println("Se ha eliminado el contacto");
+                } else {
+                    System.out.println("No se ha encontrado ningun contacto con ese nombre");
+                }
             }
+
         }
-        return cuentahuecos;
-    }
+
+        //agendaLlena(): indica si la agenda está llena.
+        public boolean agendaLlena () {
+            for (int i = 0; i < contactos.length; i++) {
+                if (contactos[i] == null) {
+                    return false;//Aun quedan huecos en la agenda
+                }
+            }
+            return true;//La agenda estaria llena
+
+        }
+
+        //huecosLibres(): indica cuantos contactos más podemos meter.
+        public int huecosLibres () {
+            int cuentahuecos = 0;
+            for (int i = 0; i < contactos.length; i++) {
+                if (contactos[i] == null) {
+                    System.out.println("El lugar en la agenda nº: " + i + " esta vacio");
+                    cuentahuecos++;
+                }
+            }
+            return cuentahuecos;
+        }
+
 
 
 }
+
