@@ -33,7 +33,7 @@ public class Agenda {
         } else if (agendaLlena()) {
             System.out.println("La agenda esta llena");
         } else {
-            for (int i = 0; i < contactos.length; i++) {
+            for (int i = 0; i < contactos.length && !hueco; i++) {
                 if (contactos[i] == null) {
                     contactos[i] = c;
                     hueco = true;
@@ -48,18 +48,20 @@ public class Agenda {
 
     }
 
-    //existeContacto(Conctacto c): indica si el contacto pasado existe o no.
+    //existeContacto(Contacto c): indica si el contacto pasado existe o no.
     public boolean existeContacto(Contactos c) {
-        if (c.getNombre().equals(c)) {
-            return false;
-        } else {
-            return true;
-        }
+        for (int i = 0; i < contactos.length; i++) {
 
+            if (contactos[i] != null && c.getNombre().equalsIgnoreCase(contactos[i].getNombre())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     //listarContactos(): Lista toda la agenda
     public void listarContactos() {
+        boolean existe = false;
         for (int i = 0; i < contactos.length; i++) {
             System.out.println(contactos[i]);
         }
@@ -68,55 +70,67 @@ public class Agenda {
 
     //buscaContacto(String nombre): busca un contacto por su nombre y muestra su teléfono.
     public void buscaContacto(String nombre) {
-        for (int i = 0; i < contactos.length; i++) {
-            if (contactos[i].getNombre().equalsIgnoreCase(nombre)) {
+
+        boolean encontrado = false;
+
+        for (int i = 0; i < contactos.length && !encontrado; i++) {
+            if (contactos[i].getNombre().equalsIgnoreCase(nombre) && contactos[i] != null) {
                 System.out.println("El contacto de nombre: " + contactos[i].getNombre() + " tiene el telefono: "
                         + contactos[i].getNumero());
+                encontrado = true;
             }
 
+        }
+        if (!encontrado) {
+            System.out.println("No se ha encontrado el contacto");
         }
     }
-        //eliminarContacto(Contacto c): elimina el contacto de la agenda,
-        // indica si se ha eliminado o no por pantalla
-        public void eliminarContacto () {
 
-            String nombre2 = "";
-            System.out.println("Introduce el nombre del contacto que quieres eliminar");
-            nombre2 = sc.nextLine();
-            for (int i = 0; i < contactos.length; i++) {
-                if (contactos[i].getNombre().equalsIgnoreCase(nombre2)) {
-                    contactos[i] = null;
-                    System.out.println("Se ha eliminado el contacto");
-                } else {
-                    System.out.println("No se ha encontrado ningun contacto con ese nombre");
-                }
+    //eliminarContacto(Contacto c): elimina el contacto de la agenda,
+    // indica si se ha eliminado o no por pantalla
+    public void eliminarContacto() {
+
+        String nombre2 = "";
+        System.out.println("Introduce el nombre del contacto que quieres eliminar");
+        nombre2 = sc.next();
+
+        boolean encontrado=false;
+
+        for (int i = 0; i < contactos.length && !encontrado; i++) {
+            if (contactos[i].getNombre().equalsIgnoreCase(nombre2) && contactos[i]!=null) {
+                contactos[i] = null;
+                encontrado=true;
             }
-
         }
+        if (encontrado){
+            System.out.println("Se ha eliminado el contacto");
+        }else
+        System.out.println("No se ha encontrado ningun contacto con ese nombre");
 
-        //agendaLlena(): indica si la agenda está llena.
-        public boolean agendaLlena () {
-            for (int i = 0; i < contactos.length; i++) {
-                if (contactos[i] == null) {
-                    return false;//Aun quedan huecos en la agenda
-                }
+    }
+
+    //agendaLlena(): indica si la agenda está llena.
+    public boolean agendaLlena() {
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] == null) {
+                return false;//Aun quedan huecos en la agenda
             }
-            return true;//La agenda estaria llena
-
         }
+        return true;//La agenda estaria llena
 
-        //huecosLibres(): indica cuantos contactos más podemos meter.
-        public int huecosLibres () {
-            int cuentahuecos = 0;
-            for (int i = 0; i < contactos.length; i++) {
-                if (contactos[i] == null) {
-                    System.out.println("El lugar en la agenda nº: " + i + " esta vacio");
-                    cuentahuecos++;
-                }
+    }
+
+    //huecosLibres(): indica cuantos contactos más podemos meter.
+    public int huecosLibres() {
+        int cuentahuecos = 0;
+        for (int i = 0; i < contactos.length; i++) {
+            if (contactos[i] == null) {
+                System.out.println("El lugar en la agenda nº: " + i + " esta vacio");
+                cuentahuecos++;
             }
-            return cuentahuecos;
         }
-
+        return cuentahuecos;
+    }
 
 
 }

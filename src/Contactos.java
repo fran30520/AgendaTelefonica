@@ -34,6 +34,6 @@ public class Contactos {
 
     //metodo toString
     public String toString() {
-        return "El " + nombre + "tiene el número de telefono: " + numero;
+        return "El contacto: " + nombre + " tiene el número de telefono: " + numero;
     }
 }
