@@ -7,9 +7,6 @@ public class Main {
     public static void main(String[] args) {
 
         Panel miPanel=new Panel();
-        miPanel.setTitle("Agenda Telefonica");
-        miPanel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        miPanel.setBounds(150,150,700,500);
         miPanel.setVisible(true);
 
 

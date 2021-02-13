@@ -69,21 +69,22 @@ public class Agenda {
     }
 
     //buscaContacto(String nombre): busca un contacto por su nombre y muestra su teléfono.
-    public void buscaContacto(String nombre) {
+    public boolean buscaContacto(String nombre) {
 
-        boolean encontrado = false;
+        boolean encontrado= false;
 
         for (int i = 0; i < contactos.length && !encontrado; i++) {
             if (contactos[i].getNombre().equalsIgnoreCase(nombre) && contactos[i] != null) {
+
                 System.out.println("El contacto de nombre: " + contactos[i].getNombre() + " tiene el telefono: "
                         + contactos[i].getNumero());
-                encontrado = true;
+                encontrado=true;
             }
-
         }
-        if (!encontrado) {
+        if (!encontrado){
             System.out.println("No se ha encontrado el contacto");
         }
+
     }
 
     //eliminarContacto(Contacto c): elimina el contacto de la agenda,
