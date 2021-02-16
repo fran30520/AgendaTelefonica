@@ -83,27 +83,64 @@ public class Panel extends JFrame implements ActionListener {
             String nombre = texto1.getText();
             int telefono = Integer.parseInt(texto2.getText());
 
-            Agenda agenda = new Agenda();
-            agenda.aniadirContacto(new Contactos(nombre, telefono));
+
+            boolean hueco = false;
+
+            if (existeContacto(c)) {
+                System.out.println("El contacto ya existe");
+            } else if (agendaLlena()) {
+                System.out.println("La agenda esta llena");
+            } else {
+                for (int i = 0; i < contacto.length && !hueco; i++) {
+                    if (contacto[i] == null) {
+                        contacto[i] = c;
+                        hueco = true;
+                    }
+                }
+                if (hueco) {
+                    System.out.println("El contacto se ha añadido");
+                } else {
+                    System.out.println("El contacto no se ha podido añadir");
+                }
+            }
+
+            agenda.aniadirContacto(contacto);
             texto1.setText("");
             texto2.setText("");
             texto3.setText("El contacto se ha añadido correctamente");
         }
         if (e.getSource() == botonBuscar) {
-            Agenda agenda = new Agenda();
+            texto3.setText("");
 
-            String nombre = texto1.getText();
-            boolean resultado = agenda.buscaContacto(nombre);
-            if (resultado){
-                contacto=new Contactos()
+            String nombre = JOptionPane.showInputDialog("Introduce el nombre a buscar");
+
+            agenda.buscaContacto(nombre);
+            //texto3.setText(agenda.buscaContacto(nombre));
+        }
+        if (e.getSource()==botonListar){
+            texto3.setText("");
+
+            for (int i = 0; i <contacto.length ; i++) {
+                if (contacto[i]!=null){
+                    texto3.setText((i+1) + "- El contacto de nombre: " + contacto[i].getNombre()
+                            + " con telefono: " + contacto[i].getNumero());
+                }
+
             }
-            texto3.setText();
+            //agenda.listarContactos();
         }
 
     }
 
+    public static void main(String[] args) {
+
+        Panel panel=new Panel();
+        panel.setVisible(true);
+    }
+
     Font font = new Font("Fuente", Font.BOLD, 16);
-    Contactos contacto;
+    Agenda agenda = new Agenda(8);
+    Contactos contacto[];
     private JButton botonAniadir;
     private JButton botonBuscar;
     private JButton botonEliminar;

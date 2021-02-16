@@ -61,21 +61,22 @@ public class Agenda {
 
     //listarContactos(): Lista toda la agenda
     public void listarContactos() {
-        boolean existe = false;
+
         for (int i = 0; i < contactos.length; i++) {
-            System.out.println(contactos[i]);
+            if (contactos[i]!=null) {
+                System.out.println(contactos[i]);
+            }
         }
 
     }
 
     //buscaContacto(String nombre): busca un contacto por su nombre y muestra su teléfono.
-    public boolean buscaContacto(String nombre) {
+    public void buscaContacto(String nombre) {
 
         boolean encontrado= false;
 
         for (int i = 0; i < contactos.length && !encontrado; i++) {
-            if (contactos[i].getNombre().equalsIgnoreCase(nombre) && contactos[i] != null) {
-
+            if (contactos[i].getNombre().trim().equalsIgnoreCase(nombre.trim()) && contactos[i] != null) {
                 System.out.println("El contacto de nombre: " + contactos[i].getNombre() + " tiene el telefono: "
                         + contactos[i].getNumero());
                 encontrado=true;
